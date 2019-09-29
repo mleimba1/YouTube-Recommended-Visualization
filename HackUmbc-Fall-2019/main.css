@@ -1,0 +1,19 @@
+body{
+	background-color:lightgray;
+}
+
+h1,h2,h3,p{
+	text-align:center;
+}
+
+#conttainer {
+	margin:auto;
+
+}
+
+.link{
+	stroke:gray;
+}
+#flags{
+	position:absolute;
+}
