@@ -17,7 +17,7 @@ def main():
     # id, title, count, duration, uploaddate, category, upnext, recommends
     reader = csv.reader(f)
     data = list(reader)
-    tree = {id:(title,count,duration,uploaddate,category,upnext,tuple([x.strip().strip("'")for x in recommends.lstrip('[').rstrip(']').split(',')])) for
+    tree = {id:(title,count,duration,uploaddate,category,upnext,tuple(sorted([x.strip().strip("'")for x in recommends.lstrip('[').rstrip(']').split(',')]))) for
             id,title,count,duration,uploaddate,category,upnext,recommends in data}
 
     nodes = {id:Node(id,title,count,duration,uploaddate,category,upnext,recommends)
@@ -35,13 +35,16 @@ def main():
             if not nodeB.recommends: continue
             if not nodeB.count: continue
             strength = 0
-            if nodeA.category == nodeB.category: strength += .5
-
-            view1, view2 = int(nodeA.count), int(nodeB.count)
-            if view1 < view2: view1, view2 = view2, view1
-            strength += view2/view1 * .5
-    #        strength = 1/len(list(difflib.ndiff(nodeA.title, nodeB.title)))
-
+##            if nodeA.category == nodeB.category: strength += .5
+##
+##            view1, view2 = int(nodeA.count), int(nodeB.count)
+##            if view1 < view2: view1, view2 = view2, view1
+##            strength += view2/view1 * .5
+##    #        strength = 1/len(list(difflib.ndiff(nodeA.title, nodeB.title)))
+            if nodeA.upnext == nodeB.id or nodeA.id == nodeB.upnext:
+                strength = .3
+            else:
+                strength = .5
             strengths[(nodeA, nodeB)] = strength
 
     json_data = {}

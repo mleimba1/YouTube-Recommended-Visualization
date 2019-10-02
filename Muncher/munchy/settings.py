@@ -34,8 +34,8 @@ TELNETCONSOLE_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    #'munchy.pipelines.CsvPipeline': 300,
-    'munchy.pipelines.RabbitMQItemPublisherPipeline': 400,
+    'munchy.pipelines.CsvPipeline': 300,
+    #'munchy.pipelines.RabbitMQItemPublisherPipeline': 400,
 }
 
 HTTPCACHE_ENABLED = False

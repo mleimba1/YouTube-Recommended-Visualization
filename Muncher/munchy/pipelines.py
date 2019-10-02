@@ -22,20 +22,20 @@
 ####        self.exporter.export_item(item)
 ####        return item
 ##
-##import csv
-##
-##FILE = "items.csv"
-##class CsvPipeline(object):
-##    def __init__(self):
-##        self.file = open(FILE, 'a')
-##        self.exporter = csv.DictWriter(self.file, ['id','title','count','duration','uploaddate','category','upnext','recommends'])
-##
-##    def close_spider(self, spider):
-##        self.file.close()
-##
-##    def process_item(self, item, spider):
-##        self.exporter.writerow(item)
-##        return item
+import csv
+
+FILE = "items.csv"
+class CsvPipeline(object):
+    def __init__(self):
+        self.file = open(FILE, 'a')
+        self.exporter = csv.DictWriter(self.file, ['id','title','count','duration','uploaddate','category','upnext','recommends'])
+
+    def close_spider(self, spider):
+        self.file.close()
+
+    def process_item(self, item, spider):
+        self.exporter.writerow(item)
+        return item
 ##
 ### From https://gist.github.com/abevoelker/1060649
 ##from scrapy import signals
@@ -118,7 +118,7 @@
 ##        self.publisher.send(self._file.getvalue())
 ##        self._file.truncate(0)
 ##        self._file.seek(0)
-##        
+##
 ##        return item
 
 
